@@ -1,0 +1,50 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Oxygen', sans-serif;
+}
+
+:root {
+    --colour-1: #CDBBA7;
+    --colour-2: #DAD0C2;
+    --colour-3: #F4DFD0;
+    --colour-4: #F0EEF1;
+    --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--colour-2);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    z-index: 10
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+.add-book-btn {
+    background-color: var(--colour-1);
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: 1px solid;
+    box-shadow: var(--box-shadow);
+}
+
+main {
+    background-color: var(--colour-4);
+    height: 1000px;
+}
