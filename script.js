@@ -6,16 +6,13 @@ const newBookCloseButton = document.querySelector(".new-book-form > button");
 
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, series, published, readstatus) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
-
-    this.info = function() {
-        let readMessage = read ? "already read" : "not read yet";
-        return `${title} by ${author}, ${pages} pages, ${readMessage}`;
-    }
+    this.series = series;
+    this.published = published;
+    this.readStatus = readstatus;
 }
 
 // function addBookToLibrary() {
@@ -32,3 +29,12 @@ addBookButton.addEventListener("click", () => newBookDialog.showModal());
 newBookCloseButton.addEventListener("click", resetForm);
 newBookDialog.addEventListener("click", resetForm);  // Clicking anywhere when dialog is open closes it
 newBookForm.addEventListener("click", (e) => e.stopPropagation());   // Ensure clicking on the form doesnt close it
+
+newBookForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(newBookForm);
+    const formDataObject = Object.fromEntries(formData);
+    const book = new Book(formDataObject.title, formDataObject.author, formDataObject.pages, formDataObject.series, formDataObject.published, formDataObject.readStatus);
+    
+    resetForm();
+})
