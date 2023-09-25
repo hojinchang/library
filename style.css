@@ -12,6 +12,7 @@
     --colour-4: #F0EEF1;
     --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     --border-radius: 10px;
+    --button-click-animation: translateY(2px);
 }
 
 .container {
@@ -190,8 +191,9 @@ fieldset > div {
     font-weight: bold;
 }
 
+.add-book-btn:active,
 .form-button:active {
-    transform: translateY(2px)
+    transform: var(--button-click-animation);
 }
 
 .reset-button:hover {
