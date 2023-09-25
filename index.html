@@ -33,11 +33,20 @@
 
             <div class="books-grid container">
                 <div class="book">
-                    <h3>Title: <span class="title"></span></h3>
+                    <div class="close-button">
+                        <span class="close">&times;</span>
+                    </div>
+                    <h3>A Game of Thrones<span class="title"></span></h3>
                     <p>Author: <span class="author"></span></p>
                     <p>Number of pages: <span class="pages"></span></p>
                     <p>Series: <span class="series"></span></p>
                     <p>Published: <span class="published"></span></p>
+                    
+                    <div class="read-book">
+                        <label for="toggle">Mark as read:</label>
+                        <input type="checkbox" id="toggle" class="read-toggle">
+                    </div>
+                
                 </div>
             </div>
         </main>

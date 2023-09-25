@@ -46,12 +46,14 @@ h1 {
     padding: 10px 20px;
     border: 1px solid;
     box-shadow: var(--box-shadow);
+    cursor: pointer;
 }
 
 .library-log {
     display: grid;
     grid-template: repeat(3, auto) / repeat(2, auto);
     max-width: 300px;
+    margin-top: 20px;
 }
 
 .books-grid {
@@ -63,10 +65,54 @@ h1 {
 .book {
     display: flex;
     flex-direction: column;
+    position: relative;
     height: auto;
     background-color: var(--colour-2);
     box-shadow: var(--box-shadow);
     gap: 1rem;
     border-radius: 10px;
     padding: 30px;
+}
+
+.book h3 {
+    margin-top: 5px;
+}
+.book > p:last-of-type{
+    margin-bottom: 10px;
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book .close {
+    font-size: 2rem;
+    color: black;
+}
+
+.read-book {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    position: absolute;
+    bottom: 10px;
+    right: 16px;
+}
+
+.read-book label {
+    font-size: 0.8rem;
+}
+
+.read-toggle {
+    width: 20px;
+    height: 20px;
 }
