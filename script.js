@@ -1,6 +1,7 @@
 const addBookButton = document.querySelector(".add-book-btn");
 const newBookDialog = document.getElementById("newBookDialog");
 const newBookForm = document.querySelector(".new-book-form");
+const newBookCloseButton = document.querySelector(".new-book-form > button");
 
 
 const myLibrary = [];
@@ -21,9 +22,13 @@ function Book(title, author, pages, read) {
 
 // }
 
-addBookButton.addEventListener("click", () => newBookDialog.showModal());
-newBookDialog.addEventListener("click", () => {   // Clicking anywhere when dialog is open closes it
+function resetForm() {
     newBookDialog.close();
     newBookForm.reset();
-});
+}
+
+addBookButton.addEventListener("click", () => newBookDialog.showModal());
+
+newBookCloseButton.addEventListener("click", resetForm);
+newBookDialog.addEventListener("click", resetForm);  // Clicking anywhere when dialog is open closes it
 newBookForm.addEventListener("click", (e) => e.stopPropagation());   // Ensure clicking on the form doesnt close it
