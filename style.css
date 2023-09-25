@@ -176,3 +176,31 @@ fieldset > div {
     justify-content: space-between;
     gap: 20px;
 }
+
+.new-book-form .form-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-button {
+    width: 45%;
+    height: 60px;
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.form-button:active {
+    transform: translateY(2px)
+}
+
+.reset-button:hover {
+    background-color: rgba(250, 2, 2, 0.3);
+}
+
+.submit-button:hover {
+    background-color: rgba(2, 250, 68, 0.3);
+}
