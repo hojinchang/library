@@ -50,13 +50,13 @@ function addBookToLibrary(newBookForm) {
     const formData = new FormData(newBookForm);
     const book = new Book(formData);
 
-    myLibrary.push(book);
+    const bookTemplateClone = bookTemplate.content.cloneNode(true);
     updateLibraryUI(bookTemplateClone, book);
+    myLibrary.push(book);
 }
 
 
 let i = 1;
-const bookTemplateClone = bookTemplate.content.cloneNode(true);
 
 
 addBookButton.addEventListener("click", () => newBookDialog.showModal());
