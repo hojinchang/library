@@ -78,6 +78,12 @@ h1 {
     padding: 30px;
 }
 
+.book-text {
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.7);
+}
+
 .book h3 {
     margin-top: 5px;
 }

@@ -32,22 +32,21 @@
             </div>
 
             <div class="books-grid container">
-                <div class="book">
+                <template class="book-template">
                     <button class="close-button" type="button">
                         <span class="close" aria-hidden="true">&times;</span>
                     </button>
-                    <h3>A Game of Thrones<span class="title"></span></h3>
-                    <p>Author: <span class="author"></span></p>
-                    <p>Number of pages: <span class="pages"></span></p>
-                    <p>Series: <span class="series"></span></p>
-                    <p>Published: <span class="published"></span></p>
+                    <h3><span class="title"></span></h3>
+                    <p>Author: <span class="author book-text"></span></p>
+                    <p>Number of pages: <span class="pages book-text"></span></p>
+                    <p>Series: <span class="series book-text"></span></p>
+                    <p>Published: <span class="published book-text"></span></p>
                     
                     <div class="read-book">
                         <label for="toggle">Mark as read:</label>
                         <input type="checkbox" id="toggle" class="read-toggle">
                     </div>
-                
-                </div>
+                </template>
             </div>
         </main>
 
