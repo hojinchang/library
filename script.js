@@ -6,13 +6,13 @@ const newBookCloseButton = document.querySelector(".new-book-form > button");
 
 const myLibrary = [];
 
-function Book(title, author, pages, series, published, readstatus) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.series = series;
-    this.published = published;
-    this.readStatus = readstatus;
+function Book(form) {
+    this.title = form.title;
+    this.author = form.author;
+    this.pages = form.pages;
+    this.series = form.series;
+    this.published = form.published;
+    this.readStatus = form.readstatus;
 }
 
 // function addBookToLibrary() {
@@ -34,7 +34,7 @@ newBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(newBookForm);
     const formDataObject = Object.fromEntries(formData);
-    const book = new Book(formDataObject.title, formDataObject.author, formDataObject.pages, formDataObject.series, formDataObject.published, formDataObject.readStatus);
-    
+    const book = new Book(formDataObject);
+
     resetForm();
 })
