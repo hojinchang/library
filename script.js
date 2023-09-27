@@ -40,8 +40,6 @@ function updateLibraryUI(bookTemplateClone, book) {
     published.textContent = book.published;
     readStatus.checked = (book.readStatus === "true");
 
-    console.log(book.readStatus, readStatus.checked)
-
     bookDiv.appendChild(bookTemplateClone);
     booksGrid.appendChild(bookDiv);
 
@@ -53,13 +51,13 @@ function addBookToLibrary(newBookForm) {
     const book = new Book(formData);
 
     myLibrary.push(book);
-
-    const bookTemplateClone = bookTemplate.content.cloneNode(true);
     updateLibraryUI(bookTemplateClone, book);
 }
 
 
 let i = 1;
+const bookTemplateClone = bookTemplate.content.cloneNode(true);
+
 
 addBookButton.addEventListener("click", () => newBookDialog.showModal());
 
