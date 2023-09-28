@@ -79,7 +79,7 @@ h1 {
 }
 
 .book-text {
-    margin-left: 10px;
+    margin-left: 5px;
     font-size: 0.9rem;
     color: rgba(0, 0, 0, 0.7);
 }
@@ -91,6 +91,7 @@ h1 {
     margin-bottom: 10px;
 }
 
+.delete-button,
 .close-button {
     position: absolute;
     top: 0;
