@@ -77,6 +77,7 @@ function createBookCard(book) {
     const readCheckbox = document.createElement("input");
     readCheckbox.classList.add("read-toggle");
     setAttributes(readCheckbox, {"type": "checkbox", "id": "toggle", "autocomplete": "off"});
+    readCheckbox.checked = book.readStatus === "true";
     readStatus.appendChild(checkboxLabel);
     readStatus.appendChild(readCheckbox);
 
