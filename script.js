@@ -18,6 +18,83 @@ function resetForm() {
     newBookForm.reset();
 }
 
+function createDeleteButton() {
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    setAttributes(deleteButton, {"type": "button", "aria-hidden": true});
+    const deleteButtonText = document.createTextNode("×");
+    deleteButton.appendChild(deleteButtonText);
+
+    return deleteButton;
+}
+
+function createTitleField(book) {
+    const title = document.createElement("h3");
+    title.textContent = book.title;
+
+    return title;
+}
+
+function createAuthorField(book) {
+    const author = document.createElement("p");
+    author.textContent = "Author: ";
+    const authorContent = document.createElement("span");
+    authorContent.classList.add("author", "book-text");
+    authorContent.textContent = book.author;
+    author.appendChild(authorContent);
+
+    return author;
+}
+
+function createPagesField(book) {
+    const pages = document.createElement("p");
+    pages.textContent = "# of pages: ";
+    const pagesContent = document.createElement("span");
+    pagesContent.classList.add("pages", "book-text");
+    pagesContent.textContent = book.pages;
+    pages.appendChild(pagesContent);
+
+    return pages;
+}
+
+function createSeriesField(book) {
+    const series = document.createElement("p");
+    series.textContent = "Series: ";
+    const seriesContent = document.createElement("span");
+    seriesContent.classList.add("series", "book-text");
+    seriesContent.textContent = book.series;
+    series.appendChild(seriesContent);
+
+    return series;
+}
+
+function createPublishedField(book) {
+    const published = document.createElement("p");
+    published.textContent = "Published: ";
+    const publishedContent = document.createElement("span");
+    publishedContent.classList.add("published", "book-text");
+    publishedContent.textContent = book.published;
+    published.appendChild(publishedContent);
+
+    return published;
+}
+
+function createReadStatusField(book) {
+    const readStatus = document.createElement("div");
+    readStatus.classList.add("read-book");
+    const checkboxLabel = document.createElement("label");
+    setAttributes(checkboxLabel, {"for": "toggle"});
+    checkboxLabel.textContent = "Mark as read:";
+    const readCheckbox = document.createElement("input");
+    readCheckbox.classList.add("read-toggle");
+    setAttributes(readCheckbox, {"type": "checkbox", "id": "toggle", "autocomplete": "off"});
+    readCheckbox.checked = book.readStatus === "true";
+    readStatus.appendChild(checkboxLabel);
+    readStatus.appendChild(readCheckbox);
+
+    return readStatus;
+}
+
 function Book(form) {
     this.title = form.get("title");
     this.author = form.get("author");
@@ -32,54 +109,14 @@ function createBookCard(book, bookCount) {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book");
 
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("delete-button");
-    setAttributes(deleteButton, {"type": "button", "aria-hidden": true});
-    const deleteButtonText = document.createTextNode("×");
-    deleteButton.appendChild(deleteButtonText);
+    const deleteButton = createDeleteButton();
 
-    const title = document.createElement("h3");
-    title.textContent = book.title;
-
-    const author = document.createElement("p");
-    author.textContent = "Author: ";
-    const authorContent = document.createElement("span");
-    authorContent.classList.add("author", "book-text");
-    authorContent.textContent = book.author;
-    author.appendChild(authorContent);
-
-    const pages = document.createElement("p");
-    pages.textContent = "# of pages: ";
-    const pagesContent = document.createElement("span");
-    pagesContent.classList.add("pages", "book-text");
-    pagesContent.textContent = book.pages;
-    pages.appendChild(pagesContent);
-
-    const series = document.createElement("p");
-    series.textContent = "Series: ";
-    const seriesContent = document.createElement("span");
-    seriesContent.classList.add("series", "book-text");
-    seriesContent.textContent = book.series;
-    series.appendChild(seriesContent);
-
-    const published = document.createElement("p");
-    published.textcontent = "Published: ";
-    const publishedContent = document.createElement("span");
-    publishedContent.classList.add("published", "book-text");
-    publishedContent.textContent = book.published;
-    published.appendChild(publishedContent);
-
-    const readStatus = document.createElement("div");
-    readStatus.classList.add("read-book");
-    const checkboxLabel = document.createElement("label");
-    setAttributes(checkboxLabel, {"for": "toggle"});
-    checkboxLabel.textContent = "Mark as read:";
-    const readCheckbox = document.createElement("input");
-    readCheckbox.classList.add("read-toggle");
-    setAttributes(readCheckbox, {"type": "checkbox", "id": "toggle", "autocomplete": "off"});
-    readCheckbox.checked = book.readStatus === "true";
-    readStatus.appendChild(checkboxLabel);
-    readStatus.appendChild(readCheckbox);
+    const title = createTitleField(book);
+    const author = createAuthorField(book);
+    const pages = createPagesField(book);
+    const series = createSeriesField(book);
+    const published = createPublishedField(book);
+    readStatus = createReadStatusField(book)
 
     for (let item of [deleteButton, title, author, pages, series, published, readStatus]) {
         bookCard.appendChild(item);
