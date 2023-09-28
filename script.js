@@ -3,11 +3,16 @@ const newBookDialog = document.getElementById("newBookDialog");
 const newBookForm = document.querySelector(".new-book-form");
 const newBookCloseButton = document.querySelector(".close-button");
 const booksGrid = document.querySelector(".books-grid");
-const bookTemplate = document.querySelector(".book-template");
 
 
 const myLibrary = [];
+booksGrid.classList.add("books-grid", "container");
 
+function setAttributes(element, attributes) {
+    for(let key in attributes) {
+      element.setAttribute(key, attributes[key]);
+    }
+  }
 
 function resetForm() {
     newBookDialog.close();
@@ -23,53 +28,66 @@ function Book(form) {
     this.readStatus = form.get("readStatus");
 }
 
-// Update library UI with book cards
-function updateLibraryUI(bookTemplateClone, book) {
-    let deleteButton = bookTemplateClone.querySelector(".delete-button")
-    let title = bookTemplateClone.querySelector(".title");
-    let author = bookTemplateClone.querySelector(".author");
-    let pages = bookTemplateClone.querySelector(".pages");
-    let series = bookTemplateClone.querySelector(".series");
-    let published = bookTemplateClone.querySelector(".published");
-    let readStatus = bookTemplateClone.querySelector(".read-toggle");
+function createBookCard(book) {
+    const bookCard = document.createElement("div");
+    bookCard.classList.add("book");
 
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    setAttributes(deleteButton, {"type": "button", "aria-hidden": true});
+    const deleteButtonText = document.createTextNode("×");
+    deleteButton.appendChild(deleteButtonText);
 
-    deleteButton.addEventListener("click", (e) => {
-        let book = e.target.closest("[data-book-num]");  // Use data attribute to select the delete button's parent container (the book container)
-        let bookNum = book.dataset.bookNum;
-        book.remove();  // Remove book from library UI
-        myLibrary.splice(bookNum, 1);
-        console.log(myLibrary);
-    })
-
-
-    // Create a div book container for the added book
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book");
-    bookDiv.dataset.bookNum = bookCount;
-    // Set template elements with new book data
+    const title = document.createElement("h3");
     title.textContent = book.title;
-    author.textContent = book.author;
-    pages.textContent = book.pages;
-    series.textContent = book.series;
-    published.textContent = book.published;
-    readStatus.checked = (book.readStatus === "true");
 
-    bookDiv.appendChild(bookTemplateClone);   // Append book data into book div
-    booksGrid.appendChild(bookDiv);   // Append book into library
+    const author = document.createElement("p");
+    author.textContent = "Author: ";
+    const authorContent = document.createElement("span");
+    authorContent.classList.add("author", "book-text");
+    authorContent.textContent = book.author;
+    author.appendChild(authorContent);
 
+    const pages = document.createElement("p");
+    pages.textContent = "# of pages: ";
+    const pagesContent = document.createElement("span");
+    pagesContent.classList.add("pages", "book-text");
+    pagesContent.textContent = book.pages;
+    pages.appendChild(pagesContent);
+
+    const series = document.createElement("p");
+    series.textContent = "Series: ";
+    const seriesContent = document.createElement("span");
+    seriesContent.classList.add("series", "book-text");
+    seriesContent.textContent = book.series;
+    series.appendChild(seriesContent);
+
+    const readStatus = document.createElement("div");
+    readStatus.classList.add("read-book");
+    const checkboxLabel = document.createElement("label");
+    setAttributes(checkboxLabel, {"for": "toggle"});
+    checkboxLabel.textContent = "Mark as read:";
+    const readCheckbox = document.createElement("input");
+    readCheckbox.classList.add("read-toggle");
+    setAttributes(readCheckbox, {"type": "checkbox", "id": "toggle", "autocomplete": "off"});
+    readStatus.appendChild(checkboxLabel);
+    readStatus.appendChild(readCheckbox);
+
+    for (let item of [deleteButton, title, author, pages, series, readStatus]) {
+        bookCard.appendChild(item);
+    }
+
+    booksGrid.appendChild(bookCard);
     myLibrary.push(book);
-    console.log(myLibrary);
-    bookCount++;   // Increment book count
 }
+
 
 function addBookToLibrary(newBookForm) {
     // Convert input form into FormData object and save into Book object
     const formData = new FormData(newBookForm);
     const book = new Book(formData);
 
-    const bookTemplateClone = bookTemplate.content.cloneNode(true);   // Create a copy of the book UI template
-    updateLibraryUI(bookTemplateClone, book);
+    createBookCard(book)
 }
 
 
