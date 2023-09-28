@@ -5,7 +5,7 @@ const newBookCloseButton = document.querySelector(".close-button");
 const booksGrid = document.querySelector(".books-grid");
 
 
-const myLibrary = [];
+let myLibrary = [];
 
 function setAttributes(element, attributes) {
     for(let key in attributes) {
@@ -18,12 +18,23 @@ function resetForm() {
     newBookForm.reset();
 }
 
+// Remove book from both library UI and libary array
+function removeBook(e) {
+    console.log(myLibrary)
+    let removeIdx = e.currentTarget.parentNode.dataset.bookIdx;
+    booksGrid.removeChild(e.currentTarget.parentNode)
+    myLibrary = myLibrary.filter(book => book["bookIdx"] != removeIdx);
+    console.log(myLibrary)
+}
+
 function createDeleteButton() {
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("delete-button");
     setAttributes(deleteButton, {"type": "button", "aria-hidden": true});
     const deleteButtonText = document.createTextNode("×");
     deleteButton.appendChild(deleteButtonText);
+
+    deleteButton.addEventListener("click", (e) => removeBook(e))
 
     return deleteButton;
 }
@@ -102,7 +113,7 @@ function Book(form) {
     this.series = form.get("series");
     this.published = form.get("published");
     this.readStatus = form.get("readStatus");
-    this.bookNum;
+    this.bookIdx;
 }
 
 function createBookCard(book, bookCount) {
@@ -122,7 +133,7 @@ function createBookCard(book, bookCount) {
         bookCard.appendChild(item);
     }
 
-    bookCard.dataset.bookNum = bookCount;
+    bookCard.dataset.bookIdx = bookCount;
 
     booksGrid.appendChild(bookCard);
     myLibrary.push(book);
@@ -133,7 +144,7 @@ function addBookToLibrary(newBookForm) {
     // Convert input form into FormData object and save into Book object
     const formData = new FormData(newBookForm);
     const book = new Book(formData);
-    book.bookNum = bookCount;
+    book.bookIdx = bookCount;
 
     createBookCard(book, bookCount)
     bookCount++;
