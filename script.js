@@ -25,9 +25,10 @@ function Book(form) {
     this.series = form.get("series");
     this.published = form.get("published");
     this.readStatus = form.get("readStatus");
+    this.bookNum;
 }
 
-function createBookCard(book) {
+function createBookCard(book, bookCount) {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book");
 
@@ -84,6 +85,8 @@ function createBookCard(book) {
         bookCard.appendChild(item);
     }
 
+    bookCard.dataset.bookNum = bookCount;
+
     booksGrid.appendChild(bookCard);
     myLibrary.push(book);
 }
@@ -93,8 +96,10 @@ function addBookToLibrary(newBookForm) {
     // Convert input form into FormData object and save into Book object
     const formData = new FormData(newBookForm);
     const book = new Book(formData);
+    book.bookNum = bookCount;
 
-    createBookCard(book)
+    createBookCard(book, bookCount)
+    bookCount++;
 }
 
 
