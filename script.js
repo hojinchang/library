@@ -20,11 +20,9 @@ function resetForm() {
 
 // Remove book from both library UI and libary array
 function removeBook(e) {
-    console.log(myLibrary)
     let removeIdx = e.currentTarget.parentNode.dataset.bookIdx;
     booksGrid.removeChild(e.currentTarget.parentNode)
     myLibrary = myLibrary.filter(book => book["bookIdx"] != removeIdx);
-    console.log(myLibrary)
 }
 
 function createDeleteButton() {
@@ -143,11 +141,18 @@ function createBookCard(book, bookCount) {
 function addBookToLibrary(newBookForm) {
     // Convert input form into FormData object and save into Book object
     const formData = new FormData(newBookForm);
-    const book = new Book(formData);
-    book.bookIdx = bookCount;
+    const newBook = new Book(formData);
 
-    createBookCard(book, bookCount)
-    bookCount++;
+    let bookExists = myLibrary.find(book => (book.title).toLowerCase() === (newBook.title).toLowerCase());
+
+    if (!bookExists) {
+        newBook.bookIdx = bookCount;
+        createBookCard(newBook, bookCount)
+        bookCount++;
+    } else {
+        alert("Book already exists in your library!")
+    }
+    
 }
 
 
