@@ -116,7 +116,7 @@ function createBookCard(book, bookCount) {
     const pages = createPagesField(book);
     const series = createSeriesField(book);
     const published = createPublishedField(book);
-    readStatus = createReadStatusField(book)
+    const readStatus = createReadStatusField(book)
 
     for (let item of [deleteButton, title, author, pages, series, published, readStatus]) {
         bookCard.appendChild(item);
