@@ -6,7 +6,6 @@ const booksGrid = document.querySelector(".books-grid");
 
 
 const myLibrary = [];
-booksGrid.classList.add("books-grid", "container");
 
 function setAttributes(element, attributes) {
     for(let key in attributes) {
@@ -111,4 +110,10 @@ newBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     addBookToLibrary(newBookForm);
     resetForm();
+})
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        resetForm();
+    }
 })
