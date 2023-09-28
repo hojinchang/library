@@ -4,7 +4,6 @@ const newBookForm = document.querySelector(".new-book-form");
 const newBookCloseButton = document.querySelector(".close-button");
 const booksGrid = document.querySelector(".books-grid");
 const bookTemplate = document.querySelector(".book-template");
-const bookDeleteButton = document.querySelector(".delete-button");
 
 
 const myLibrary = [];
@@ -34,9 +33,20 @@ function updateLibraryUI(bookTemplateClone, book) {
     let published = bookTemplateClone.querySelector(".published");
     let readStatus = bookTemplateClone.querySelector(".read-toggle");
 
+
+    deleteButton.addEventListener("click", (e) => {
+        let book = e.target.closest("[data-book-num]");  // Use data attribute to select the delete button's parent container (the book container)
+        let bookNum = book.dataset.bookNum;
+        book.remove();  // Remove book from library UI
+        myLibrary.splice(bookNum, 1);
+        console.log(myLibrary);
+    })
+
+
     // Create a div book container for the added book
     const bookDiv = document.createElement("div");
-    bookDiv.classList.add(`book_${i}`, "book");
+    bookDiv.classList.add("book");
+    bookDiv.dataset.bookNum = bookCount;
     // Set template elements with new book data
     title.textContent = book.title;
     author.textContent = book.author;
@@ -48,7 +58,9 @@ function updateLibraryUI(bookTemplateClone, book) {
     bookDiv.appendChild(bookTemplateClone);   // Append book data into book div
     booksGrid.appendChild(bookDiv);   // Append book into library
 
-    bookCount++;   // 
+    myLibrary.push(book);
+    console.log(myLibrary);
+    bookCount++;   // Increment book count
 }
 
 function addBookToLibrary(newBookForm) {
@@ -58,12 +70,10 @@ function addBookToLibrary(newBookForm) {
 
     const bookTemplateClone = bookTemplate.content.cloneNode(true);   // Create a copy of the book UI template
     updateLibraryUI(bookTemplateClone, book);
-    myLibrary.push(book);
 }
 
 
-let bookCount = 1;
-
+let bookCount = 0;
 
 addBookButton.addEventListener("click", () => newBookDialog.showModal());
 
@@ -75,8 +85,4 @@ newBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     addBookToLibrary(newBookForm);
     resetForm();
-})
-
-bookDeleteButton.addEventListener("click", (e) => {
-    console.log(e.target)
 })
