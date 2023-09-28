@@ -62,6 +62,13 @@ function createBookCard(book) {
     seriesContent.textContent = book.series;
     series.appendChild(seriesContent);
 
+    const published = document.createElement("p");
+    published.textcontent = "Published: ";
+    const publishedContent = document.createElement("span");
+    publishedContent.classList.add("published", "book-text");
+    publishedContent.textContent = book.published;
+    published.appendChild(publishedContent);
+
     const readStatus = document.createElement("div");
     readStatus.classList.add("read-book");
     const checkboxLabel = document.createElement("label");
@@ -73,7 +80,7 @@ function createBookCard(book) {
     readStatus.appendChild(checkboxLabel);
     readStatus.appendChild(readCheckbox);
 
-    for (let item of [deleteButton, title, author, pages, series, readStatus]) {
+    for (let item of [deleteButton, title, author, pages, series, published, readStatus]) {
         bookCard.appendChild(item);
     }
 
