@@ -125,9 +125,10 @@ class Library {
         if (!this.isInLibrary(newBook)) {
             newBook.bookIdx = bookCount;
             this.books.push(newBook);
-            bookCount++;
+            return
         } else {
             alert("Book already exists in your library!")
+            return true;
         }
     }
 
@@ -185,10 +186,11 @@ const displayController = (() => {
     newBookForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        _createBookCard(convertFormToBook(newBookForm), bookCount);
-        library.addBook(convertFormToBook(newBookForm));
+        let bookExists = library.addBook(convertFormToBook(newBookForm));
+        if (!bookExists) _createBookCard(convertFormToBook(newBookForm), bookCount);
 
         _resetForm();
+        bookCount++;
     })
     
     document.addEventListener("keydown", (e) => {
