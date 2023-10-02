@@ -1,11 +1,3 @@
-// const addBookButton = document.querySelector(".add-book-btn");
-// const newBookDialog = document.getElementById("newBookDialog");
-// const newBookForm = document.querySelector(".new-book-form");
-// const newBookCloseButton = document.querySelector(".close-button");
-// const booksGrid = document.querySelector(".books-grid");
-
-
-
 const createBook = (() => {
 
     const _setAttributes = (element, attributes) => {
